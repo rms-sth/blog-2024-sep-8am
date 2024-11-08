@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if form.errors  and form.non_field_errors %}
+
+    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+      {{ form.non_field_errors }}
+      <button type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"></button>
+    </div>
+  {% endif %}
+
+  <form action="" method="post" class="m-2">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text"
+             class="form-control"
+             placeholder="Enter username"
+             name="username"
+             value="{{ form.username.value|default:"" }}" />
+      {{ form.username.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password"
+             class="form-control"
+             placeholder="Enter password"
+             name="password"
+             value="{{ form.password.value|default:"" }}" />
+      {{ form.password.errors }}
+    </div>
+    <button type="submit" class="btn btn-success">Login</button>
+  </form>
+{% endblock content %}
